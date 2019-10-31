@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  Input,
+  Output,
+  EventEmitter
+} from "@angular/core";
 import { TodoService } from "./todo.service";
 
 @Component({
@@ -16,9 +23,13 @@ import { TodoService } from "./todo.service";
 export class TodoListComponent implements OnInit {
   todos: any[] = [];
   @Input("name") name: string;
+  @Output() dataLoaded = new EventEmitter();
   constructor(private service: TodoService) {}
 
   ngOnInit() {
-    this.service.getTodos().subscribe(todos => (this.todos = todos));
+    this.service.getTodos().subscribe(todos => {
+      this.todos = todos;
+      this.dataLoaded.emit(todos);
+    });
   }
 }
