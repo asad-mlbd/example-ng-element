@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
 import { TodoService } from "./todo.service";
 
 @Component({
   selector: "app-todo-list",
   template: `
-    <p>todo-list works!</p>
+    <p>{{ name }}'s todo list</p>
     <ul>
       <li *ngFor="let todo of todos">
         {{ todo.title }}
@@ -15,6 +15,7 @@ import { TodoService } from "./todo.service";
 })
 export class TodoListComponent implements OnInit {
   todos: any[] = [];
+  @Input("name") name: string;
   constructor(private service: TodoService) {}
 
   ngOnInit() {
