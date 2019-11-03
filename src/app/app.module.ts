@@ -10,7 +10,11 @@ import { TodoListComponent } from "./todo-list/todo-list.component";
   declarations: [AppComponent, TodoListComponent],
   imports: [BrowserModule, HttpClientModule],
   providers: [],
+
+  /** We no more need bootstrap the app component */
   // bootstrap: [AppComponent],
+
+  /** Declare todo list component as entryComponents */
   entryComponents: [TodoListComponent]
 })
 export class AppModule {

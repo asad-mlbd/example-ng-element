@@ -9,17 +9,14 @@
 
     <script src="./output-es2015.js" type="module"></script>
     <script src="./output-es2015.js" nomodule></script>
+
     <script type="text/javascript">
-      function handleDataLoading(todos) {
-        console.log(todos);
-      }
       const el = document.querySelector("my-todo-list");
-      console.log(el);
       el.addEventListener(
-        "dataLoaded",
-        function handleDataLoading(e) {
-          const todos = e.detail;
-          console.log("Data loaded", todos);
+        "todoComplete",
+        function onTodoComplete(e) {
+          const todo = e.detail;
+          console.log("Todo Completed", todos);
         },
         false
       );

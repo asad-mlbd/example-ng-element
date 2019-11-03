@@ -14,6 +14,11 @@ import { TodoService } from "./todo.service";
     <p>{{ name }}'s todo list</p>
     <ul>
       <li *ngFor="let todo of todos">
+        <input
+          type="checkbox"
+          [checked]="todo.isCompleted"
+          (change)="markAsChecked(todo)"
+        />
         {{ todo.title }}
       </li>
     </ul>
@@ -23,13 +28,18 @@ import { TodoService } from "./todo.service";
 export class TodoListComponent implements OnInit {
   todos: any[] = [];
   @Input("name") name: string;
-  @Output() dataLoaded = new EventEmitter();
+  @Output() todoComplete = new EventEmitter();
+
   constructor(private service: TodoService) {}
 
   ngOnInit() {
     this.service.getTodos().subscribe(todos => {
       this.todos = todos;
-      this.dataLoaded.emit(todos);
     });
+  }
+
+  markAsChecked(todo) {
+    todo.isCompleted = !todo.isCompleted;
+    this.todoComplete.emit(todo);
   }
 }
